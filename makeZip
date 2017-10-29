@@ -1,0 +1,8 @@
+rm -rf indienen/
+mkdr indienen
+cd indienen/
+cp -r ../project/src/heap .
+cp -r ../project/test .
+cp -r ../project/verslag/verslag.pdf .
+zip -r indienen.zip .
+mv indienen.zip ..

@@ -1,0 +1,17 @@
+\select@language {dutch}
+\contentsline {chapter}{\numberline {1}Algoritmen}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Algemeen}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Binaire hoop}{1}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Centrale operaties}{1}{subsection.1.2.1}
+\contentsline {subsubsection}{moveUp}{2}{subsubsection*.1}
+\contentsline {subsubsection}{fixHeap}{2}{subsubsection*.2}
+\contentsline {subsection}{\numberline {1.2.2}Element incrementeren}{2}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Element decrementeren}{3}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}Element verwijderen}{3}{subsection.1.2.4}
+\contentsline {subsection}{\numberline {1.2.5}Bijhouden van wijzers}{3}{subsection.1.2.5}
+\contentsline {section}{\numberline {1.3}Binomiale wachtlijn}{4}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Bijhouden van wijzers}{4}{subsection.1.3.1}
+\contentsline {section}{\numberline {1.4}Leftist heap}{4}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Bijhouden van wijzers}{4}{subsection.1.4.1}
+\contentsline {chapter}{\numberline {2}Tests}{4}{chapter.2}
+\contentsline {chapter}{\numberline {3}Experimenten}{4}{chapter.3}

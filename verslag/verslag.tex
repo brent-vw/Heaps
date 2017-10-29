@@ -1,0 +1,188 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[dutch]{babel}           % Nederlands
+\usepackage[latin1]{inputenc}       % speciale karakters
+
+\usepackage{palatino} % font
+\usepackage{graphicx} % figuren
+
+\usepackage{titlesec}	%chapter formating
+
+\usepackage[hyperfootnotes=false]{hyperref} % PDF bookmarks
+
+\renewenvironment{quote}                            % kleinere citaten
+               {\list{}{\rightmargin\leftmargin}    %
+                \item[]\small}                      %
+               {\endlist}                           %
+
+\setlength{\parindent}{0pt}         % indenteringen met witlijn
+\setlength{\parskip}{1em}           %
+
+\setlength{\hoffset}{-1cm}          % kleinere marges
+\addtolength{\textwidth}{2cm}
+\setlength{\voffset}{-1cm}
+\addtolength{\textheight}{2cm}
+
+\makeatletter                               % een witlijn tussen
+\renewcommand{\footnoterule}{               % voetnoten en tekst
+  \vspace{1em}                              %
+  \kern-3\p@\hrule\@width.4\columnwidth     %
+  \kern2.6\p@}                              %
+\makeatother                                %
+                                            %
+                               
+\usepackage[stable]{footmisc}               % pakket voor bep. voetnoten. (voetnoten in titels)
+
+\usepackage{graphicx}   %afbeeldingen
+
+\newcommand{\nroman}{\renewcommand{\thepage}{\roman{page}}\setcounter{page}{0}}     % romeinse nummers
+\newcommand{\narabic}{\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1}}   % arabische nummers
+
+\setcounter{tocdepth}{3} %include subsubsections in toc
+
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e} 		% Algoritmen
+\usepackage{algpseudocode}									%
+\renewcommand*{\listalgorithmcfname}{Lijst van algoritmen}	%
+\renewcommand*{\algorithmcfname}{Algoritme}					%
+\renewcommand*{\algorithmautorefname}{algoritme}				%
+%%% TITEL EN AUTEUR %%%
+
+\renewcommand{\title}{
+			Wachtlijnen \\
+			\large Project Algoritmen en Datastructuren II}
+\renewcommand{\author}{
+\textbf{\large Brent Van Wynsberge} \\
+\small 3$^e$ bachelor Informatica, Universiteit Gent \\
+\small Algoritmen en Datastructuren II \\
+\small Stamnummer: 01201853 \\
+}
+
+
+%%% / / / %%%
+
+\renewcommand{\maketitle}{
+\thispagestyle{empty}
+\begin{minipage}{3.5in}
+\includegraphics{ugent.png}
+\end{minipage}
+\hfill
+\begin{minipage}{3in}
+\begin{flushright}
+\author
+\bigskip
+\textbf{\today}
+\end{flushright}
+\end{minipage}
+\vspace{5em}
+\vspace*{\fill}
+\begin{center}
+\Huge{\title}
+\end{center}
+\vspace*{\fill}}
+
+\titleclass{\chapter}{straight} %prevent newlines
+\titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge} %chapterformat
+
+\newcommand{\bigO}[1]{$\bm{\mathcal{O}(#1)}$} %big O notatie
+
+\usepackage{bm}
+
+
+\begin{document}
+\global\emergencystretch = .3\hsize
+
+%%% INLEIDEND %%%
+\nroman
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+
+%%% HOOFDSTUKKEN %%%
+\newpage
+\narabic
+
+\chapter{Algoritmen} %bespreking complexiteit en algoritmen
+\section{Algemeen}
+Aangezien het belangrijk was om de prioriteiten voor elke wachtlijn aan te kunnen passen was het nodig om elke referentie naar het effectieve element zo effici\"ent mogelijk bij te houden. Daarom was het het beste om de referenties naar de Elementen en de effectief achterliggende datastructuur afzonderlijk bij te houden. \\ 
+Zo kan de elementwijzer gewoon naar een nieuwe datastructuurwijzer wijzen indien deze aangepast wordt en moeten eventuele andere elementen die naar het gewijzigde element niet aangepast worden. \\ \\ %P
+De kost voor deze keuze is natuurlijk extra gebruik van het geheugen, maar we zullen later opmerken dat waar de geheugenkost het grootst is ook de tijdscomplexiteit veel beter wordt. \\ \\ %P
+Omdat het effici\"ent opslaan van deze wijzers zo belangrijk is wordt dit bij elk algoritme verder besproken. %P \\ \\
+Voor het aanpassen van de elementen maken we telkens onderscheid van twee gevallen: het incrementeren van een Element en decrementeren van een element. Dit omdat ze beide een belangrijk verschil hebben, en het decrementeren van een element in vele gevallen effici\"enter kan gebeuren dan zijn tegenhanger. %p
+\section{Binaire hoop}  % BHeap
+\subsection{Centrale operaties}
+Elke bewerking op de binaire hoop is gebaseerd op 2 operaties: 'moveUp' en 'fixHeap'. Daarom geven we hieronder de pseudocode voor deze operaties en tonen we de complexiteit aan.
+\subsubsection{moveUp}
+\begin{algorithm}[H]
+\caption{moveUp}
+\SetAlgoLined	
+\DontPrintSemicolon
+$element \gets elementToMove$\;
+\While{$hasParent(element) \land parent > element$}{
+swap(element, parent)\;
+$element \gets parent$\;
+}
+\end{algorithm}
+De 'swap' operatie wisselt de elementen en hun indexen om in \bigO{1} tijd. In het slechtste geval verplaatst dit een blad naar de wortel. Deze operatie heeft dus een complexiteit \bigO{\log n}.
+\subsubsection{fixHeap}
+\begin{algorithm}[H]
+\caption{fixHeap}
+\SetAlgoLined	
+\DontPrintSemicolon
+$element \gets elementToMove$\;
+\While{$hasChild(element)$}{
+$min \gets smallest(leftChild(element), rightChild(element))$\;
+\If{$element \leq min$}{
+\textbf{return}\;}
+swap(element, min)\;
+$element \gets min$\;
+}
+\end{algorithm}
+In het slechtste geval wordt hier de wortel naar een blad verplaatst wat ook een complexiteit \bigO{\log n} heeft.
+\subsection{Element incrementeren}
+\begin{algorithm}[H]
+\caption{incrementElement}
+\SetAlgoLined	
+\DontPrintSemicolon
+$element.value \gets newValue$\;
+moveUp(element.index)\;	
+\end{algorithm}
+We zien direct dat 'moveUp' hier de duurste operatie is en we hebben al eerder aangetoond wat zijn complexiteit is. Deze operatie heeft dus complexiteit \bigO{\log n}.
+\subsection{Element decrementeren}
+\begin{algorithm}[H]
+\caption{decrementElement}
+\SetAlgoLined	
+\DontPrintSemicolon
+$element.value \gets newValue$\;
+fixHeap(element.index)\;		
+\end{algorithm}
+Analoog met hierboven heeft deze operatie een complexiteit \bigO{\log n}.
+\subsection{Element verwijderen}
+\begin{algorithm}[H]
+\caption{deleteElement}
+\SetAlgoLined	
+\DontPrintSemicolon
+$element.value \gets -\infty$\;
+moveUp(element.index)\;	
+removeMin()\;
+\end{algorithm}
+Hier geven we de het element de kleinst mogelijke waarde zodat het in de wortel terechtkomt als we de 'moveUp' operatie uitvoeren (in de praktijk geven we met een boolean aan dat we het element in de wortel willen). Nadien verwijderen we de wortel uit de binaire hoop. We weten reeds dat 'moveUp' complexiteit \bigO{\log n} heeft. En in Algoritmen en Datastructuren I hebben we reeds aangetoond dat de 'removeMin' operatie ook complexiteit \bigO{\log n} heeft. We kunnen dit hier ook eenvoudig inzien omdat bij 'removeMin' het laatste blad de nieuwe wortel wordt en dan 'fixHeap' op deze wortel wordt toegepast. \\ \\
+Dus ook deze operatie heeft complexiteit \bigO{\log n}.
+\subsection{Bijhouden van wijzers}
+Het bijhouden van de locatie van het Element binnen de datastructuur is erg goedkoop. Aangezien de binaire hoop in arrayvorm opgeslagen wordt volstaat het om bij elk Element een index bij te houden. \\ \\
+Wanneer we dit Element willen aanpassen weten we direct waar in het array het Element zich bevindt en besparen we de kost van het opzoeken van het Element. Als we dit element verplaatsen kunnen we gewoon de index binnen het Element object aanpassen. Dit kan natuurlijk in \bigO{1} tijd. 
+\section{Binomiale wachtlijn} % Prio queue
+\subsection{Centrale operaties}
+\subsection{Element incrementeren}
+\subsection{Element decrementeren}
+\subsection{Element verwijderen}
+\subsection{Bijhouden van wijzers}
+\section{Leftist heap}
+\subsection{Bijhouden van wijzers}
+\chapter{Tests} %bespreking van de testmethodes
+
+\chapter{Experimenten} %bespreking van de experimenten en vergelijking van de algoritmen
+
+\end{document}

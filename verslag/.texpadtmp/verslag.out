@@ -1,0 +1,16 @@
+\BOOKMARK [0][-]{chapter.1}{Algoritmen}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Algemeen}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Binaire hoop}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.2.1}{Centrale operaties}{section.1.2}% 4
+\BOOKMARK [3][-]{subsubsection*.1}{moveUp}{subsection.1.2.1}% 5
+\BOOKMARK [3][-]{subsubsection*.2}{fixHeap}{subsection.1.2.1}% 6
+\BOOKMARK [2][-]{subsection.1.2.2}{Element incrementeren}{section.1.2}% 7
+\BOOKMARK [2][-]{subsection.1.2.3}{Element decrementeren}{section.1.2}% 8
+\BOOKMARK [2][-]{subsection.1.2.4}{Element verwijderen}{section.1.2}% 9
+\BOOKMARK [2][-]{subsection.1.2.5}{Bijhouden van wijzers}{section.1.2}% 10
+\BOOKMARK [1][-]{section.1.3}{Binomiale wachtlijn}{chapter.1}% 11
+\BOOKMARK [2][-]{subsection.1.3.1}{Bijhouden van wijzers}{section.1.3}% 12
+\BOOKMARK [1][-]{section.1.4}{Leftist heap}{chapter.1}% 13
+\BOOKMARK [2][-]{subsection.1.4.1}{Bijhouden van wijzers}{section.1.4}% 14
+\BOOKMARK [0][-]{chapter.2}{Tests}{}% 15
+\BOOKMARK [0][-]{chapter.3}{Experimenten}{}% 16
